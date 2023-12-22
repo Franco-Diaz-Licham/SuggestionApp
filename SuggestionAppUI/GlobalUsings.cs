@@ -1,6 +1,4 @@
 ﻿
-global using SuggestionAppLibrary.DataAccess;
-global using SuggestionAppLibrary.Models;
-global using SuggestionAppUI;
-
+global using SuggestionAppLibrary.DataAccess.Classes;
+global using SuggestionAppLibrary.DataAccess.Interfaces;
 

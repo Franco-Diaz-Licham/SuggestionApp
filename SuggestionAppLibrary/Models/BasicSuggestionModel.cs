@@ -8,7 +8,7 @@ public class BasicSuggestionModel
 
     public BasicSuggestionModel() { }
 
-    public BasicSuggestionModel(BasicSuggestionModel suggestion)
+    public BasicSuggestionModel(SuggestionModel suggestion)
     {
         Id = suggestion.Id;
         Title = suggestion.Title;
