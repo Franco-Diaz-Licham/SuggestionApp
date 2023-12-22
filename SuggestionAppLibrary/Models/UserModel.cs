@@ -12,6 +12,6 @@ public class UserModel
     public string EmailAddress { get; set; }
 
     // related models
-    public List<SuggestionModel> AuthoredSuggestions { get; set; } = new();
-    public List<SuggestionModel> VotedOnSuggestions { get; set; } = new();
+    public List<BasicSuggestionModel> AuthoredSuggestions { get; set; } = new();
+    public List<BasicSuggestionModel> VotedOnSuggestions { get; set; } = new();
 }
