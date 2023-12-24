@@ -2,6 +2,6 @@
 
 public interface ICategoryData
 {
-    Task CreateCategory(CategoryModel category);
+    Task CreateCategoryAsync(CategoryModel category);
     Task<List<CategoryModel>> GetAllCategoriesAsync();
 }

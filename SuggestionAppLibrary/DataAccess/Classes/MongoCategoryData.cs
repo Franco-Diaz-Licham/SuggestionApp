@@ -38,7 +38,7 @@ public class MongoCategoryData : ICategoryData
     /// </summary>
     /// <param name="category"></param>
     /// <returns></returns>
-    public Task CreateCategory(CategoryModel category)
+    public Task CreateCategoryAsync(CategoryModel category)
     {
         return _categories.InsertOneAsync(category);
     }

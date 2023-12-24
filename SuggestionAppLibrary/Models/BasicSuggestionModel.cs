@@ -11,6 +11,6 @@ public class BasicSuggestionModel
     public BasicSuggestionModel(SuggestionModel suggestion)
     {
         Id = suggestion.Id;
-        Title = suggestion.Title;
+        Title = suggestion.Suggestion;
     }
 }

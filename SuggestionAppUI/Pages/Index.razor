@@ -2,7 +2,70 @@
 
 <PageTitle>Index</PageTitle>
 
-<h1>Hello, world!</h1>
+<h1>Training Suggestions</h1>
+<div><button>Suggest</button></div>
 
-Welcome to your new app.
+@* Filterting *@
+<div >
+    <div>@_suggestions.Count Suggestions</div>
+    <div>
+        <button @onclick="@(() => OrderByNew(true))">New</button>
+        <button @onclick="@(() => OrderByNew(false))">Popular</button>
+    </div>
+    <div>
+        <input type="text" placeholder="Search" aria-label="Search Box" @oninput="@((txt) => OnSearchChanged((string)txt.Value))" />
+    </div>
+</div>
 
+@* Body *@
+<div>
+
+    @* Suggestions *@
+    <div>
+        @if(_suggestions is not null)
+        {
+            <Virtualize Items="@_suggestions" Context="s" OverscanCount="10">
+                <div>
+                    <div>
+                        <div>@GetUpvoteTopText(s)</div>
+                        <span class="oi oi-caret-top"/>
+                        <div>@GetUpBoteBottomText(s)</div>
+                    </div>
+                    <div>
+                        <div @onclick=@(() => OpenDetails(s))>@s.Suggestion</div>
+                        <div @onclick=@(() => OpenDetails(s))>@s.Category?.CategoryName</div>
+                    </div>
+                    <div>
+                        <div>@s.SuggestionStatus?.StatusName</div>
+                    </div>
+                </div>
+            </Virtualize>
+        }
+    </div>
+
+    @* categories *@
+    <div>
+        @if(_categories is not null)
+        {
+            <div>
+                <span>Category</span>
+                <div @onclick="(() => OnCategoryChanged())">All</div>
+                @foreach(var cat in _categories)
+                {
+                    <div @onclick="(() => OnCategoryChanged(cat.CategoryName))">@cat.CategoryName</div>
+                }
+            </div>
+        }
+        @if(_statuses is not null)
+        {
+            <div>
+                <span>Category</span>
+                <div @onclick="(() => OnStatusChanged())">All</div>
+                @foreach (var stat in _statuses)
+                {
+                    <div @onclick="(() => OnStatusChanged(stat.StatusName))">@stat.StatusName</div>
+                }
+            </div>
+        }
+    </div>
+</div>

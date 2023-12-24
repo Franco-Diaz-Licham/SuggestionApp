@@ -12,7 +12,7 @@ public class SuggestionModel
     public BasicUserModel Author { get; set; }
     public HashSet<string> UserVotes { get; set; } = new();
     public StatusModel SuggestionStatus { get; set; }
-    public string OwnerVotes { get; set; }
+    public string OwnerNotes { get; set; }
     public bool ApprovedForRelease { get; set; } = false;
     public bool Archived { get; set; } = false;
     public bool Rejected { get; set; } = false;
