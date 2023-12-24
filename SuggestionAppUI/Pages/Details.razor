@@ -1,0 +1,45 @@
+﻿@page "/details/{id}"
+
+<div>
+    <div>
+        @if(_suggestion is not null)
+        {
+            <div>
+                <div>
+                    <div>
+                        <div>@GetUpvoteTopText()</div>
+                        <span class="oi oi-caret-top" />
+                        <div>@GetUpBoteBottomText()</div>
+                    </div>
+                </div>
+                <div>
+                    <div>@_suggestion.DateCreated.ToString("dd-MM-yyyy")</div>
+                </div>
+                <div>
+                    <div>@_suggestion.Suggestion</div>
+                    <div>@_suggestion.Author.DisplayName</div>
+                    <div>@_suggestion.Description</div>
+                    <div>@_suggestion.Category.CategoryName</div>
+                </div>
+                <div>
+                    <button @onclick="ClosePage">Close</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@if(_suggestion?.SuggestionStatus is not null)
+{
+    <div>
+        <div>
+            <div></div>
+            <div>
+                <div>@_suggestion.SuggestionStatus.StatusName</div>
+                <div>@((MarkupString)_suggestion.OwnerNotes)</div>
+            </div>
+        </div>
+    </div>
+}
+
+

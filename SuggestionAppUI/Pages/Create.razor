@@ -1,0 +1,41 @@
+﻿@page "/create"
+
+<h1>Make A Suggestion</h1>
+<div>
+    <div>
+        <div>
+            <button @onclick="ClosePage">Close</button>
+        </div>
+        @if(_categories is not null)
+        {
+            <EditForm Model="_suggestion" OnValidSubmit="CreateSuggestion">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+                <div>
+                    <label for="suggestion-text">Suggestion</label>
+                    <div>Focus on the topic or technology you want to learn about.</div>
+                    <InputText id="suggestion-text" @bind-Value="_suggestion.Suggestion" />
+                </div>
+                <div>
+                    <label for="category">Category</label>
+                    <div>Choose one category.</div>
+                    <CustomInputRadioGroup id="category" @bind-Value="_suggestion.CategoryId">
+                        @foreach (var c in _categories)
+                        {
+                            <div>
+                                <InputRadio Value="@c.Id" id="@c.Id" />
+                                <label for="@c.Id">@c.CategoryName - @c.CategoryDescription</label>
+                            </div>
+                        }
+                    </CustomInputRadioGroup>
+                </div>
+                <div>
+                    <label for="description-text">Description</label>
+                    <div>Briefly describe your suggestion.</div>
+                    <InputText id="description-text" @bind-Value="_suggestion.Description" />
+                </div>
+                <div><button type="submit">Suggest</button></div>
+            </EditForm>
+        }
+    </div>
+</div>

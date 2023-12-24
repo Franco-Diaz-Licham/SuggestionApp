@@ -39,6 +39,21 @@ public class MongoSuggestionData : ISuggestionData
         return output;
     }
 
+    public async Task<List<SuggestionModel>> GetUsersSuggestionsAsync(string userId)
+    {
+        var output = _cache.Get<List<SuggestionModel>>(userId);
+
+        if(output is null)
+        {
+            var results = await _suggestions.FindAsync(x => x.Author.Id == userId);
+
+            output = results.ToList();
+            _cache.Set(userId, output, TimeSpan.FromMinutes(1));
+        }
+
+        return output;
+    }
+
     /// <summary>
     /// Method which gets all approved suggestions and filters through all that have been
     /// approved for release.
