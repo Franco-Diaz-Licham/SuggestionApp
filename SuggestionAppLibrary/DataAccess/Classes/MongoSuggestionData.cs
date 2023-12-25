@@ -132,11 +132,11 @@ public class MongoSuggestionData : ISuggestionData
             }
 
             // complete update suggestion with the new one
-            await suggestionsInTraction.ReplaceOneAsync(x => x.Id == suggestionId, suggestion);
+            await suggestionsInTraction.ReplaceOneAsync(session, x => x.Id == suggestionId, suggestion);
 
             // find user details who upvoted
             var usersInTransaction = db.GetCollection<UserModel>(_db.UserCollectionName);
-            var user = await _userData.GetUserAsync(suggestion.Author.Id);
+            var user = await _userData.GetUserAsync(userId);
 
             // add upvoted suggestion to list of voted suggestion of user.
             if (isUpvote == true)
@@ -149,7 +149,7 @@ public class MongoSuggestionData : ISuggestionData
                 user.VotedOnSuggestions.Remove(suggestionToRemove);
             }
 
-            await usersInTransaction.ReplaceOneAsync(x => x.Id == userId, user);
+            await usersInTransaction.ReplaceOneAsync(session, x => x.Id == userId, user);
 
             await session.CommitTransactionAsync();
 
@@ -188,7 +188,7 @@ public class MongoSuggestionData : ISuggestionData
 
             // update authored list of suggestions for user.
             user.AuthoredSuggestions.Add(new BasicSuggestionModel(suggestion));
-            await usersInTransaction.ReplaceOneAsync(x => x.Id == user.Id, user);
+            await usersInTransaction.ReplaceOneAsync(session, x => x.Id == user.Id, user);
 
             await session.CommitTransactionAsync();
         }

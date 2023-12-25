@@ -1,4 +1,5 @@
 ﻿@page "/profile"
+@attribute [Authorize]
 
 <div>
     <div><button @onclick="ClosePage">Close</button></div>
@@ -6,7 +7,7 @@
 
 <div>
     <h2>My Account</h2>
-    <p><a href="#">Edit My Profile</a></p>
+    <p><a href="MicrosoftIdentity/Account/EditProfile">Edit My Profile</a></p>
 </div>
 
 @* approved *@

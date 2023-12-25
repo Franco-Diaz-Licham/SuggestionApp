@@ -1,3 +1,5 @@
+using SuggestionAppUI.Helpers;
+
 namespace SuggestionAppUI.Pages;
 
 public partial class Create
@@ -7,6 +9,7 @@ public partial class Create
     [Inject] private ISuggestionData _suggestionData { get; set; }
     [Inject] private IUserData _userData { get; set; }
     [Inject] private NavigationManager _navigate { get; set; }
+    [Inject] private AuthenticationStateProvider _auth {  get; set; }
 
     private CreateSuggestionModel _suggestion { get; set; } = new();
     private List<CategoryModel> _categories {  get; set; } = new();
@@ -14,10 +17,8 @@ public partial class Create
 
     protected override async Task OnInitializedAsync()
     {
+        _loggedInUser = await _auth.GetUserFromAuth(_userData);
         _categories = await _categoryData.GetAllCategoriesAsync();
-
-        // TODO: replace with proper authentication
-        _loggedInUser = await _userData.GetUserAsync("65866832cb7716c8aa6ddb1b");
     }
 
     private void ClosePage()

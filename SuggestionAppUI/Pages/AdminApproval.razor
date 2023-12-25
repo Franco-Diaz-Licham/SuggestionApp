@@ -1,4 +1,5 @@
 ﻿@page "/admin_approval"
+@attribute [Authorize(Policy = "Admin")]
 
 <h1>Pending Submissions</h1>
 

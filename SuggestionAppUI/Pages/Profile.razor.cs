@@ -1,3 +1,5 @@
+using SuggestionAppUI.Helpers;
+
 namespace SuggestionAppUI.Pages;
 
 public partial class Profile
@@ -6,6 +8,7 @@ public partial class Profile
     [Inject] private ISuggestionData _suggestionData { get; set; }
     [Inject] private IUserData _userData { get; set; }
     [Inject] private NavigationManager _navigate { get; set; }
+    [Inject] private AuthenticationStateProvider _auth { get; set; }
 
     //
     private UserModel _loggedInUser { get; set; }
@@ -17,7 +20,7 @@ public partial class Profile
 
     protected override async Task OnInitializedAsync()
     {
-        _loggedInUser = await _userData.GetUserFromAuthenticationAsync("1233");
+        _loggedInUser = await _auth.GetUserFromAuth(_userData);
 
         var result = await _suggestionData.GetUsersSuggestionsAsync(_loggedInUser.Id);
 

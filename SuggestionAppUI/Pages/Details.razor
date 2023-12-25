@@ -5,7 +5,7 @@
         @if(_suggestion is not null)
         {
             <div>
-                <div>
+                <div @onclick="VoteUp">
                     <div>
                         <div>@GetUpvoteTopText()</div>
                         <span class="oi oi-caret-top" />
